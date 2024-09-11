@@ -1,0 +1,3 @@
+[submodule "glisore_root"]
+	path = glisore_root
+	url = https://github.com/tikoko23/glisore-root.git
