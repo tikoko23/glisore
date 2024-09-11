@@ -1,0 +1,20 @@
+{
+	"authors": [
+		"tikoko"
+	],
+	"copyright": " ",
+	"dependencies": {
+		"raylib-d": "~>5.0.1"
+	},
+	
+	"lflags": ["-L/usr/local/lib", "-lraylib"],
+
+	"description": "A game attempt idk",
+	"license": " ",
+	"name": "game_or_smth",
+	"sourcePaths": ["source", "tests"],
+	"importPaths": [
+		"source",
+		"tests"
+	]
+}
