@@ -1,1 +1,3 @@
 # Glisore
+
+some game idk
