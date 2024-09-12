@@ -11,7 +11,10 @@ import tile;
 import chunk;
 import camera;
 import render;
+import vector;
+import misc_utils;
 import string_utils;
+import declarations;
 
 class Logger {
     string context;
@@ -87,6 +90,11 @@ class Logger {
 alias DebugDrawQuery = void delegate();
 
 DList!DebugDrawQuery DEBUG_DRAW_QUERIES;
+
+void drawDebugRect(Rectangle r, Color color = Color(255, 100, 100, 100)) {
+	Vec!(dec, 2) topLeft = tileToScreen(posFromRect(r)).cnv!dec();
+	DrawRectangleV(topLeft.rv, sizeFromRect(r).scale(cast(dec) PIXELS_PER_TILE).rv, color);
+}
 
 void debugDraw() {
 	draw();

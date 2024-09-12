@@ -77,8 +77,7 @@ abstract class Entity : GameObject {
         TilePos otherTilePos = toTilePos(this.position) + getDirVector!long(d);
 
         dec sizeOffset = ceil(this.collider.height / 2);
-        Vec!(dec, 2) offsetV = getAxisVector!dec(inv(axisOf(d)), sizeOffset);
-
+        Vec!(dec, 2) offsetV = axisOf(d) == Axis.X ? Vec!(dec, 2)(0, sizeOffset) : Vec!(dec, 2)(sizeOffset, 0);
         Tile otherTile = getTile(otherTilePos);
 
         if ("passthrough" in otherTile.tags)
@@ -87,11 +86,15 @@ abstract class Entity : GameObject {
         Rectangle thisCollider = rectOffset(this.collider.shapes[shapeIdx], this.position.cnv!float());
         Rectangle otherTileCollider = rectFromV(
             otherTilePos.cnv!float() - offsetV,
-            Vec!(float, 2)(1.0f, 1.0f) + offsetV
+            Vec!(float, 2)(1.0f, 1.0f) + offsetV * 2
         );
 
         DEBUG_DRAW_QUERIES.insertFront(() {
-            DrawRectangleRec(CAMERA.transform(otherTileCollider), Color(255, 50, 50, 100));
+            if (axisOf(d) == Axis.X)
+                drawDebugRect(rectOffset(otherTileCollider, Vec!(float, 2)(0, 2)));
+            else
+                drawDebugRect(otherTileCollider);
+            
         });
 
         Rectangle colRes = GetCollisionRec(thisCollider, otherTileCollider);
